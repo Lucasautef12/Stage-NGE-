@@ -1,3 +1,5 @@
 docx
 PyPDF2
 rtfparse
+python-magic
+PyMuPDF

@@ -1,4 +1,3 @@
-#Read a USB key 
 import os 
 import zipfile
 from PyPDF2 import PdfReader
@@ -6,6 +5,8 @@ from docx import Document
 from striprtf.striprtf import rtf_to_text
 import shutil
 import time
+import fitz
+
 
 path_data = './data/'
 
@@ -47,15 +48,72 @@ def list_all_formats(path):
                     formats.update(list_all_formats(new_path))
     return formats
 
+def count_files_by_format(path):
+    format_counts = {}
+
+    def count_files_by_format_rec(path):
+        for entry in os.scandir(path):
+            format = os.path.splitext(entry.name)[1]
+            if entry.is_file() and not entry.name.endswith('.zip') and format != '':
+                if format in format_counts:
+                    format_counts[format] += 1
+                else:
+                    format_counts[format] = 1
+            elif entry.is_dir():
+                new_path = os.path.join(path, entry.name)
+                count_files_by_format_rec(new_path)
+    
+    count_files_by_format_rec(path)
+
+    return format_counts
+
+def is_plan(path_pdf):
+    doc = fitz.open(path_pdf)
+
+    for i, page in enumerate(doc):
+        draw = page.get_drawings()
+        nb_drawings = len(draw)
+
+        words = page.get_text("words")
+        nb_words = len(words)
+
+        if nb_drawings > nb_words:
+            return True
+    
+    return False
 
 
+def count_number_plans(path):
+    count = 0
+
+    for entry in os.scandir(path):
+        if entry.is_file() and entry.name.endswith('.pdf') and is_plan(entry.path):
+            count += 1
+        elif entry.is_dir():
+            count += count_number_plans(entry.path)
+
+    return count
 
 if __name__ == "__main__":
-    name_folder = "METZ (57) Crous Saulcy"
-    path_folder = path_data + name_folder
+    name_folder1 = "LARMOR PLAGE (56) Résidence Riva Ilot Chaton"
+    path_folder1 = path_data + name_folder1
 
-    time0 = time.time()
-    dezipp(path_folder)
-    time1 = time.time()
-    print(f"Decompression completed in {time1 - time0:.2f} seconds")
+    #nb_plans1 = count_number_plans(path_folder1)
+    #print(f"Number of plans in {name_folder1} : {nb_plans1}")
+
+    name_folder2 = "EPONE (78) Collège Benjamin FRANKLIN"
+    path_folder2 = path_data + name_folder2
+
+    nb_plans2 = count_number_plans(path_folder2)
+    print(f"Number of plans in {name_folder2} : {nb_plans2}")
+
+    name_folder_3  = "METZ (57) Crous Saulcy"
+    path_folder_3 = path_data + name_folder_3
+
+    #nb_plans_3 = count_number_plans(path_folder_3)
+    #print(f"Number of plans in {name_folder_3} : {nb_plans_3}")
+
+
+
+
     
