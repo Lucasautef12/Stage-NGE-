@@ -89,9 +89,19 @@ def remove_obsolet_files(path):
         elif entry.is_dir():
             remove_obsolet_files(entry.path)
 
+def print_empty_format_file(path):
+    for entry in os.scandir(path):
+        extension = os.path.splitext(entry.name)[1]
+        if entry.is_file() and entry.name.endswith(''):
+            print(f"Empty file {entry.name}: {extension}")
+        elif entry.is_dir():
+            print_empty_format_file(entry.path)
+
 if __name__ == "__main__":
-    name_folder1 = "LARMOR PLAGE (56) Résidence Riva Ilot Chaton"
-    remove_obsolet_files(path_data)
+    name_folder1 = "EPONE (78) Collège Benjamin FRANKLIN"
+    path_folder1 = os.path.join(path_data, name_folder1)
+
+    print_empty_format_file(path_folder1)
 
 
 
