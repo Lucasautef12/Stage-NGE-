@@ -1,7 +1,6 @@
 import os 
 import zipfile
 from PyPDF2 import PdfReader
-from docx import Document
 import py7zr
 path_data = './data/'
 
