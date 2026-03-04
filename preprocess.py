@@ -24,7 +24,7 @@ def preprocess(folder):
             os.remove(entry.path)
             preprocess(entry.path[:-3])            
 
-        elif entry.is_file() and (entry.name.endswith('.dwg') or entry.name.endswith('.ifc') or entry.name.endswith('.bcp') or entry.name.endswith('.2d') or entry.name.endswith('.3d') or os.path.splitext(entry.name)[1] == ''):
+        elif entry.is_file() and (entry.name.endswith('.dwg') or entry.name.endswith('.ifc') or entry.name.endswith('.bcp') or entry.name.endswith('.2d') or entry.name.endswith('.3d') or entry.name.endswith('.pc3') or entry.name.endswith('.ctb') or entry.name.endswith('.bak') or entry.name.endswith('.css') or entry.name.endswith('.2db') or entry.name.endswith('.xsl') or os.path.splitext(entry.name)[1] == '' ):
             os.remove(entry.path)
 
         elif entry.is_dir():

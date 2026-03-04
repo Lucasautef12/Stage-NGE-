@@ -1,10 +1,4 @@
 import os 
-import zipfile
-from PyPDF2 import PdfReader
-from docx import Document
-from striprtf.striprtf import rtf_to_text
-import shutil
-import time
 import fitz
 
 
@@ -101,8 +95,8 @@ if __name__ == "__main__":
     name_folder1 = "EPONE (78) Collège Benjamin FRANKLIN"
     path_folder1 = os.path.join(path_data, name_folder1)
 
-    print_empty_format_file(path_folder1)
-
+    list_formats = list_all_formats(path_data)
+    print(f"Formats présents dans le dossier {path_data} : {list_formats}")
 
 
 

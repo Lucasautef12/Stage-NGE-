@@ -1,0 +1,12 @@
+[package]
+name = "preprocessor"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+#Pour décompresser les dossiers du dce 
+zip = "0.6"
+#Pour parcourir récursivement les répertoires à toute vitesse
+walkdir = "2.3"
+#Pour la gestion des erreurs
+anyhow = "1.0"
