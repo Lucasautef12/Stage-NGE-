@@ -3,3 +3,4 @@ python-docx
 PyCryptodome
 striprtf
 Data
+__pycache__
