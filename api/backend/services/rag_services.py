@@ -31,7 +31,7 @@ class RAG:
         #Create the qdrant client to connect to the vector database
         self.qdrant_client = qdrant_client.QdrantClient(
             path=BASE_dir / qdrant_path, # URL de connexion à la base de données vectorielle Qdrant, en local 
-            prefer_grpc=False, # Utilise gRPC pour une communication plus rapide avec la base de données vectorielle
+            prefer_grpc=False
         )
 
         self.converter = DocumentConverter()  # Initialise le convertisseur de documents pour extraire le texte des fichiers PDF, DOCX, etc.
