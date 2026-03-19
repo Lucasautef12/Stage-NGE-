@@ -3,4 +3,9 @@ python-docx
 PyCryptodome
 striprtf
 Data
+venv
 __pycache__
+api/.env
+api/backend/.models
+api/backend/.output
+api/backend/qdrant_data

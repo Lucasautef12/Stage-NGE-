@@ -2,6 +2,8 @@ import os
 import zipfile
 from PyPDF2 import PdfReader
 import py7zr
+ 
+
 path_data = './data/'
 
 def preprocess(folder):
@@ -34,6 +36,6 @@ def preprocess(folder):
         if entry.is_dir() and len(os.listdir(entry.path)) == 0:
             os.rmdir(entry.path)
 
+
 if __name__ == "__main__":
     name_folder1 = "LARMOR PLAGE (56) Résidence Riva Ilot Chaton"
-    preprocess(path_data)
